@@ -1,1 +1,53 @@
 
+version : "3"                 # ustawienie wersji
+
+services:
+  nginx:                      # usluga oparta o nginx
+    build: "./uslugi/nginx"  # budowanie obrazu za pomoca dockerfile'a w folderze uslugi/nginx
+    restart: always           # ustawienie restartowania  
+    ports:                    # mapowanie portu do wyswietlania strony
+      - "6666:80"
+    networks:                 # skonfigurowanie przynaleznosci do sieci
+      - frontend
+      - backend
+    volumes:                  # ustawienie wolumenow dla strony oraz konfiguracji jej serwera
+      - ./str:/str
+      - ./str.conf:/etc/nginx/conf.d/default.conf
+    depends_on:               # ustawienie zaleznosci uslugi
+      - mysql
+      - php
+
+  php:                        # usluga oparta o php
+    build: "./uslugi/php"    #  budowanie obrazu za pomoca dockerfile'a w folderze uslugi/php
+    restart: always           # ustawienie restartowania  
+    networks:                 # skonfigurowanie przynaleznosci do sieci
+      - backend
+    volumes:                  # ustawienie wolumenow dla strony
+      - ./str:/str
+
+  phpmyadmin:                 # usluga phpMyAdmin
+    build: "./uslugi/phpmyadmin"   #budowanie obrazu za pomoca dockerfile'a w folderze uslugi/phpmyadmin
+    restart: always           # ustawienie restartowania 
+    environment:              # ustawienie parametrow srodowiskowych w celu ustawienia hosta bazy danych
+      - PMA_HOST=mysql
+    depends_on:               #  ustawienie zaleznosci uslugi
+      - mysql
+    networks:                 # skonfigurowanie przynaleznosci do sieci
+      - backend
+    ports:                    # mapowanie portu dla bazy phpmyadmin
+      - "6001:80"
+
+  mysql:                      # usluga oparta o mysql
+    build: "./uslugi/mysql"  # budowanie obrazu za pomoca dockerfile'a w folderze uslugi/php
+    restart: always           # ustawienie restartowania 
+    environment:              # ustawienie parametrow srodowiskowych dla hasla roota oraz nazwy hosta
+      - MYSQL_ROOT_PASSWORD=weronika
+      - MYSQL_HOST=localhost
+    networks:                 # skonfigurowanie przynaleznosci do sieci
+      - backend
+    volumes:                  # ustawienie wolumenu dla bazy danych
+      - ./database:/var/lib/mysql 
+
+networks:                     # utworzenie sieci backend i frontend
+  backend:
+  frontend:
