@@ -29,7 +29,7 @@ Katalog zawierający projekt zawiera plik docker-compose oraz dwa foldery:
 
 Dodatkowo w celu prawidłowego działania strony, został utworzony plik konfiguracyjny str.conf.
 
-Po utworzeniu katalogów, plików dockerfile, pliku konfiguracyjnego strony oraz utworzeniu pliku docker-compose.yml,przeszłam do uruchomienia serwisu. W tym celu i ze względu na posiadaną wersję Docker'a użyłam polecenia: docker-compose up.
+Po utworzeniu katalogów, plików dockerfile, pliku konfiguracyjnego strony oraz utworzeniu pliku docker-compose.yml, za pomocą polecenia docker-compose up uruchomiony został serwis.
 
 Następnie:
 
