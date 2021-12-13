@@ -27,4 +27,6 @@ Katalog zawierający projekt zawiera plik docker-compose oraz dwa foldery:
 -str- folder zawierający plik index.php, czyli stronę, która będzie wyświetlana przez serwer po połączeniu z bazą danych
 -uslugi- folder zawierający pliki dockerfile do tworzenia danych usług
 
-![docker_compose_up](https://user-images.githubusercontent.com/94804536/145884149-dbbafdd7-70a9-4f40-be6b-4a98c258e381.png)
+Dodatkowo w celu prawidłowego działania strony, został utworzony plik konfiguracyjny str.conf.
+
+Po utworzeniu katalogów, plików dockerfile, pliku konfiguracyjnego strony oraz utworzeniu pliku docker-compose.yml,przeszłam do uruchomienia serwisu. W tym celu i ze względu na posiadaną wersję Docker'a użyłam polecenia: docker-compose up.
